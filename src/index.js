@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 const initialState = {
     name: 'Numan',
     profession: 'SD1',
+    company: 'W42',
     status: 'Single'
 }
 

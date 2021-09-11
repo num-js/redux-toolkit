@@ -1,9 +1,10 @@
 import React from 'react';
+import Profile from './Components/Profile';
 
 const App = () => {
     return (
         <>
-            Hello Numan
+            <Profile />
         </>
     );
 }
