@@ -5,19 +5,10 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
-
-const initialState = {
-    name: 'Numan',
-    profession: 'SD1',
-    company: 'W42',
-    status: 'Single'
-}
+import userReducer from './Store/reducer/userReducer';
 
 const Store = configureStore({
-    reducer: (state) => {
-        return state;
-    },
-    preloadedState: initialState
+    reducer: userReducer
 })
 
 ReactDOM.render(
