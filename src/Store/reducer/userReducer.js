@@ -1,5 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
-import { UPDATE_COMPANY, UPDATE_PROFESSION, UPDATE_STATUS } from "../constants";
+import { UPDATE_COMPANY, UPDATE_NAME, UPDATE_PROFESSION, UPDATE_STATUS } from "../constants";
 
 const initialState = {
     name: 'Numan',
@@ -34,6 +34,10 @@ const userReducer = createReducer(initialState, (builder) => {
 
     builder.addCase(UPDATE_PROFESSION, (state, action) => {
         state.profession = action.payload
+    });
+
+    builder.addCase(UPDATE_NAME, (state, action) => {
+        state.name = action.payload
     });
 })
 

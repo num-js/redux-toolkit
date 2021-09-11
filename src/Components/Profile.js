@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import updateProfession from '../Store/actions/userAction';
+import APIRequestHelper from '../helpers/APIRequestHelper';
+import { updateName, updateProfession } from '../Store/actions/userAction';
 import { UPDATE_COMPANY, UPDATE_PROFESSION, UPDATE_STATUS } from '../Store/constants';
 
 const Profile = () => {
@@ -20,6 +21,10 @@ const Profile = () => {
         dispatch(updateProfession(profession));
     }
 
+    const updateNameHandler = async () => {
+        dispatch(updateName());
+    }
+
     return (
         <>
             <h4>Hey, I'm {name}</h4>
@@ -34,6 +39,9 @@ const Profile = () => {
 
             &nbsp; &nbsp;
             <button onClick={() => updateProfessionHandler('SD1')}>Update Pro</button>
+
+            &nbsp; &nbsp;
+            <button onClick={() => updateNameHandler()}>Update Name From N.Contact Api</button>
 
         </>
     );

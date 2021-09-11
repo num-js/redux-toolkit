@@ -1,5 +1,6 @@
 import { createAction } from "@reduxjs/toolkit";
-import { UPDATE_PROFESSION } from "../constants"
+import APIRequestHelper from "../../helpers/APIRequestHelper";
+import { UPDATE_NAME, UPDATE_PROFESSION } from "../constants"
 
 // In Old Redux Style
 // const updateProfession = (updatedData) => {
@@ -11,6 +12,14 @@ import { UPDATE_PROFESSION } from "../constants"
 
 
 // In new Redux-ToolKit Style
-const updateProfession = createAction(UPDATE_PROFESSION);
+export const updateProfession = createAction(UPDATE_PROFESSION);
 
-export default updateProfession;
+export const updateName = () => {
+    // createAction(UPDATE_NAME)
+    return async (dispatch) => {
+        const res = await APIRequestHelper('get', 'get_contacts');
+        const newName = res.data[0].name;
+
+        dispatch({ type: UPDATE_NAME, payload: newName });
+    }
+}
