@@ -2,19 +2,28 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import APIRequestHelper from '../helpers/APIRequestHelper';
 import { updateName, updateProfession } from '../Store/actions/userAction';
-import { UPDATE_COMPANY, UPDATE_PROFESSION, UPDATE_STATUS } from '../Store/constants';
+import { UPDATE_COMPANY, UPDATE_STATUS } from '../Store/constants';
+import { updateCompany, updateStatus } from '../Store/reducer/userReducer';
 
 const Profile = () => {
 
     const { name, profession, company, status } = useSelector((state) => state);
     const dispatch = useDispatch();
 
-    const updateStatus = (status) => {
-        dispatch({ type: UPDATE_STATUS, payload: status })
+    const updateStatusHandler = (status) => {
+        // dispatch({ type: UPDATE_STATUS, payload: status })
+
+        /**
+         * By Adding createSlice in Reducer, no need to Dispatch any action.
+         * Now Directly dispatch the Reducer, & createSlice handle actions internally.
+         * Actions be like - 'users/updateStatus' ===> [reducer name/reducerfunctionname]
+         */
+        dispatch(updateStatus(status));
     }
 
-    const updateCompany = (company) => {
-        dispatch({ type: UPDATE_COMPANY, payload: company })
+    const updateCompanyHandler = (company) => {
+        // dispatch({ type: UPDATE_COMPANY, payload: company })
+        dispatch(updateCompany('X2A'))
     }
 
     const updateProfessionHandler = (profession) => {
@@ -32,10 +41,10 @@ const Profile = () => {
             <h4>& I'm {status} </h4>
 
             <br />
-            <button onClick={() => updateStatus('Coder')}>Update Status</button>
+            <button onClick={() => updateStatusHandler('Bechara Coder')}>Update Status</button>
 
             &nbsp; &nbsp;
-            <button onClick={() => updateCompany('W42')}>Update Company</button>
+            <button onClick={() => updateCompanyHandler('W42')}>Update Company</button>
 
             &nbsp; &nbsp;
             <button onClick={() => updateProfessionHandler('SD1')}>Update Pro</button>

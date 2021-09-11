@@ -1,4 +1,4 @@
-import { createReducer } from "@reduxjs/toolkit";
+import { createReducer, createSlice } from "@reduxjs/toolkit";
 import { UPDATE_COMPANY, UPDATE_NAME, UPDATE_PROFESSION, UPDATE_STATUS } from "../constants";
 
 const initialState = {
@@ -23,22 +23,38 @@ const initialState = {
 // }
 
 //New Redux-ToolKit Style
-const userReducer = createReducer(initialState, (builder) => {
-    builder.addCase(UPDATE_STATUS, (state, action) => {
-        state.status = action.payload
-    });
+// const userReducer = createReducer(initialState, (builder) => {
+//     builder.addCase(UPDATE_STATUS, (state, action) => {
+//         state.status = action.payload
+//     });
 
-    builder.addCase(UPDATE_COMPANY, (state, action) => {
-        state.company = action.payload
-    });
+//     builder.addCase(UPDATE_COMPANY, (state, action) => {
+//         state.company = action.payload
+//     });
 
-    builder.addCase(UPDATE_PROFESSION, (state, action) => {
-        state.profession = action.payload
-    });
+//     builder.addCase(UPDATE_PROFESSION, (state, action) => {
+//         state.profession = action.payload
+//     });
 
-    builder.addCase(UPDATE_NAME, (state, action) => {
-        state.name = action.payload
-    });
+//     builder.addCase(UPDATE_NAME, (state, action) => {
+//         state.name = action.payload
+//     });
+// })
+
+// createSlice Ka Jalwa 😎 - No Need of Actions
+const userReducer = createSlice({
+    name: 'users',
+    initialState,
+    reducers: {
+        updateStatus(state, action) {
+            state.status = action.payload
+        },
+        updateCompany(state, action) {
+            state.company = action.payload
+        },
+    }
 })
 
-export default userReducer;
+export const { updateStatus, updateCompany } = userReducer.actions;
+
+export default userReducer.reducer;
