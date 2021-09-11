@@ -1,6 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { UPDATE_STATUS } from '../Store/constants';
+import updateProfession from '../Store/actions/userAction';
+import { UPDATE_COMPANY, UPDATE_PROFESSION, UPDATE_STATUS } from '../Store/constants';
 
 const Profile = () => {
 
@@ -11,6 +12,14 @@ const Profile = () => {
         dispatch({ type: UPDATE_STATUS, payload: status })
     }
 
+    const updateCompany = (company) => {
+        dispatch({ type: UPDATE_COMPANY, payload: company })
+    }
+
+    const updateProfessionHandler = (profession) => {
+        dispatch(updateProfession(profession));
+    }
+
     return (
         <>
             <h4>Hey, I'm {name}</h4>
@@ -19,6 +28,13 @@ const Profile = () => {
 
             <br />
             <button onClick={() => updateStatus('Coder')}>Update Status</button>
+
+            &nbsp; &nbsp;
+            <button onClick={() => updateCompany('W42')}>Update Company</button>
+
+            &nbsp; &nbsp;
+            <button onClick={() => updateProfessionHandler('SD1')}>Update Pro</button>
+
         </>
     );
 }
