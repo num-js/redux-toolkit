@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import APIRequestHelper from '../helpers/APIRequestHelper';
 import { updateName, updateProfession } from '../Store/actions/userAction';
 import { UPDATE_COMPANY, UPDATE_STATUS } from '../Store/constants';
-import { updateCompany, updateStatus } from '../Store/reducer/userReducer';
+import { generateRandomFrnd, updateCompany, updateStatus } from '../Store/reducer/userReducer';
 
 const Profile = () => {
 
-    const { name, profession, company, status } = useSelector((state) => state);
+    const { name, profession, company, status, frndName } = useSelector((state) => state);
     const dispatch = useDispatch();
 
     const updateStatusHandler = (status) => {
@@ -51,6 +51,14 @@ const Profile = () => {
 
             &nbsp; &nbsp;
             <button onClick={() => updateNameHandler()}>Update Name From N.Contact Api</button>
+
+            <br />
+            <br />
+            <br />
+
+            <div align="center">
+                <span><button onClick={() => dispatch(generateRandomFrnd())}>Generate Random Frnd</button></span> <span>{frndName}</span>
+            </div>
 
         </>
     );

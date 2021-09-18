@@ -1,11 +1,22 @@
-import { createReducer, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createReducer, createSlice } from "@reduxjs/toolkit";
+import APIRequestHelper from "../../helpers/APIRequestHelper";
 import { UPDATE_COMPANY, UPDATE_NAME, UPDATE_PROFESSION, UPDATE_STATUS } from "../constants";
+
+export const generateRandomFrnd = createAsyncThunk(
+    'frndName/generateRandomFrnd',
+    async () => {
+        const res = await APIRequestHelper('get', 'get_contacts');
+        const randomIndex = Math.floor(Math.random() * (res.data.length));
+        return res.data[randomIndex].name;
+    }
+)
 
 const initialState = {
     name: 'Numan',
     profession: 'Full Stack Dev',
     company: 'SrcLogicx',
-    status: 'Single'
+    status: 'Single',
+    frndName: '',
 }
 
 //Old Redux Style
@@ -52,6 +63,17 @@ const userReducer = createSlice({
         updateCompany(state, action) {
             state.company = action.payload
         },
+    },
+    extraReducers: {
+        [generateRandomFrnd.fulfilled]: (state, { payload }) => {
+            state.frndName = payload
+        },
+        [generateRandomFrnd.pending]: (state, { payload }) => {
+            state.frndName = 'Generating..'
+        },
+        [generateRandomFrnd.rejected]: (state, { payload }) => {
+            state.frndName = 'Failed!'
+        }
     }
 })
 
